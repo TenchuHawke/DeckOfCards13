@@ -1,4 +1,3 @@
-using System;
 namespace CardGame {
     public class Card {
         public string stringVal
