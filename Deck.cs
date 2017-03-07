@@ -2,14 +2,21 @@ using System;
 using System.Collections.Generic;
 namespace CardGame {
     public class Deck {
-        private List<object> cards = new List<object> ();
-        public void shuffle () {
+        // a deck is a list of cards, instanciate a new list.
+        public List<object> cards = new List<object> ();
+        // shuffle method (uses )
+        public void mix () {
             Random rand = new Random ();
             for (int i = 0; i < cards.Count; i++) {
                 object temp = cards[i];
-                int newLocation = (rand.Next (0, 51));
+                int newLocation = (rand.Next (0, cards.Count));
                 cards[i] = cards[newLocation];
                 cards[newLocation] = temp;
+            }
+        }
+        public void shuffle (int times) {
+            for (int i = 0; i < times; i++) {
+                mix ();
             }
         }
         public object deal () {
@@ -30,7 +37,16 @@ namespace CardGame {
         public override string ToString () {
             string info = "";
             foreach (Card card in cards) {
-                info += card + "\n";
+                if (card.color == "red") {
+                    info += card + "\n";
+                    // info.Bold ().Red ();
+                } else if (card.color == "black") {
+                    info += card + "\n";
+                    // info.Bold ().Yellow ();
+                } else {
+                    info += card + "\n";
+                    // info.Bold ().White ();
+                }
             }
             return info;
         }
